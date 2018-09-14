@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    文件： <input type="file" name="myFile" id="myFile" onchange="getFileContent();"> <br>
+    <div></div>
+    <input type="submit">
+</form>
+<img src="" alt="">
+<script>
+    var div=document.querySelector("div");
+    function getFileContent() {
+        var reader=new FileReader();
+        var file=document.querySelector("#myFile").files;
+        reader.readAsDataURL(file[0]);
+        reader.onload=function () {
+            document.querySelector("img").src=reader.result;
+        };
+        reader.onprogress=function (e) {
+          var percent=e.loaded/e.total*100+"%";
+          div.style.width=percent;
+        };
+    }
+</script>
+</body>
+</html>
